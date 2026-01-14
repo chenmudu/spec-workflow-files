@@ -95,16 +95,16 @@ After completing all phases, the plugin suggests using planning-with-files if de
 
 ## 📊 Feature Comparison
 
-| Feature | Spec Workflow Files | Planning-with-Files |
-|---------|---------------------|---------------------|
-| **Purpose** | Planning & Documentation | Execution Tracking |
-| **Files** | 3 (in `.specs/`) | 3 (in root) |
-| **Hooks** | ✅ Yes | ✅ Yes |
-| **Phase Enforcement** | ✅ Yes | ❌ No |
-| **EARS Format** | ✅ Yes | ❌ No |
-| **Task Tracking** | ✅ Yes | ✅ Yes |
-| **Clean Directory** | ✅ `.specs/` | ⚠️ Root files |
-| **Best For** | Planning phase | Execution phase |
+| Feature | Spec Workflow Files | Planning-with-Files | Kiro |
+|---------|---------------------|---------------------|------|
+| **Purpose** | Planning & Documentation | Execution Tracking | Methodology Guide |
+| **Files** | 3 (in `.specs/`) | 3 (in root) | Documentation only |
+| **Hooks** | ✅ Yes | ✅ Yes | ❌ No |
+| **Phase Enforcement** | ✅ Yes | ❌ No | ❌ No |
+| **EARS Format** | ✅ Yes | ❌ No | ✅ Yes (guide) |
+| **Task Tracking** | ✅ Yes | ✅ Yes | ❌ No |
+| **Clean Directory** | ✅ `.specs/` | ⚠️ Root files | N/A |
+| **Best For** | Planning phase | Execution phase | Learning methodology |
 
 ## 🎓 Best Practices
 
