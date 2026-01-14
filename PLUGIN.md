@@ -2,6 +2,13 @@
 
 A Claude Code plugin providing file-based spec workflow for systematic feature development.
 
+## Requirements
+
+- **jq** - Required for workflow status checking and hooks
+  - Windows: Download from [jqlang.github.io/jq](https://jqlang.github.io/jq/download/)
+  - macOS: `brew install jq`
+  - Linux: `apt-get install jq` or `yum install jq`
+
 ## Installation
 
 ### Method 1: Install from GitHub (Recommended)

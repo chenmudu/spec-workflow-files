@@ -20,6 +20,13 @@ A Claude Code plugin that enforces a three-phase workflow for feature developmen
 
 ## 🚀 Quick Start
 
+### Requirements
+
+- **jq** - Required for workflow status checking and hooks
+  - Windows: Download from [jqlang.github.io/jq](https://jqlang.github.io/jq/download/)
+  - macOS: `brew install jq`
+  - Linux: `apt-get install jq` or `yum install jq`
+
 ### Installation
 
 ```bash

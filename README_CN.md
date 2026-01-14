@@ -20,6 +20,13 @@
 
 ## 🚀 快速开始
 
+### 依赖要求
+
+- **jq** - 工作流状态检查和 hooks 功能所需
+  - Windows: 从 [jqlang.github.io/jq](https://jqlang.github.io/jq/download/) 下载
+  - macOS: `brew install jq`
+  - Linux: `apt-get install jq` 或 `yum install jq`
+
 ### 安装
 
 ```bash
