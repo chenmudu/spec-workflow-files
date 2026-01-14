@@ -1,0 +1,22 @@
+{
+  "name": "spec-workflow-files",
+  "version": "1.0.0",
+  "description": "File-based spec workflow for systematic feature development. Creates requirements.md, design.md, and tasks.md in .specs/ directory with hooks for workflow enforcement. Ensures proper phase sequencing and documentation quality.",
+  "author": {
+    "name": "chenmudu",
+    "url": "https://github.com/chenmudu"
+  },
+  "repository": "https://github.com/chenmudu/spec-workflow-files",
+  "license": "MIT",
+  "keywords": [
+    "spec-workflow",
+    "requirements",
+    "design",
+    "tasks",
+    "workflow",
+    "planning",
+    "hooks",
+    "EARS",
+    "documentation"
+  ]
+}

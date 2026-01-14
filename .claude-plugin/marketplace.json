@@ -1,0 +1,14 @@
+{
+  "name": "spec-workflow-marketplace",
+  "owner": {
+    "name": "chenmudu",
+    "url": "https://github.com/chenmudu"
+  },
+  "plugins": [
+    {
+      "name": "spec-workflow-files",
+      "source": "./",
+      "description": "File-based spec workflow with requirements, design, and tasks phases. Enforces proper sequencing through hooks."
+    }
+  ]
+}
