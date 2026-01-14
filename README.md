@@ -22,8 +22,8 @@ A Claude Code plugin that enforces a three-phase workflow for feature developmen
 
 ```bash
 # In Claude Code
-/plugin marketplace add https://github.com/chenmudu/spec-workflow-files
-/plugin install spec-workflow-files@spec-workflow-marketplace
+/plugin marketplace add chenmudu/spec-workflow-files
+/plugin install spec-workflow-files@spec-workflow-files
 ```
 
 ### Usage
@@ -161,7 +161,7 @@ cd spec-workflow-files
 
 # Install locally
 /plugin marketplace add ./
-/plugin install spec-workflow-files@spec-workflow-marketplace
+/plugin install spec-workflow-files@spec-workflow-files
 ```
 
 ## 📝 Example

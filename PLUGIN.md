@@ -8,8 +8,8 @@ A Claude Code plugin providing file-based spec workflow for systematic feature d
 
 ```bash
 # In Claude Code
-/plugin marketplace add https://github.com/chenmudu/spec-workflow-files
-/plugin install spec-workflow-files@spec-workflow-marketplace
+/plugin marketplace add chenmudu/spec-workflow-files
+/plugin install spec-workflow-files@spec-workflow-files
 ```
 
 ### Method 2: Install from Local Clone
@@ -21,20 +21,20 @@ cd spec-workflow-files
 
 # In Claude Code (from parent directory)
 /plugin marketplace add ./spec-workflow-files
-/plugin install spec-workflow-files@spec-workflow-marketplace
+/plugin install spec-workflow-files@spec-workflow-files
 ```
 
 ### Installation Scopes
 
 ```bash
 # User scope (default) - available in all projects
-/plugin install spec-workflow-files@spec-workflow-marketplace
+/plugin install spec-workflow-files@spec-workflow-files
 
 # Project scope - shared with team via git
-/plugin install spec-workflow-files@spec-workflow-marketplace --scope project
+/plugin install spec-workflow-files@spec-workflow-files --scope project
 
 # Local scope - project-specific, gitignored
-/plugin install spec-workflow-files@spec-workflow-marketplace --scope local
+/plugin install spec-workflow-files@spec-workflow-files --scope local
 ```
 
 ## What Gets Installed
@@ -221,7 +221,7 @@ When Claude is about to stop, shows workflow status automatically.
 
 ```bash
 # Update to latest version
-/plugin update spec-workflow-files@spec-workflow-marketplace
+/plugin update spec-workflow-files@spec-workflow-files
 ```
 
 ## Uninstalling
