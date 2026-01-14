@@ -327,30 +327,35 @@ sudo apt-get install jq
 
 ## Integration with Other Tools
 
-### With Planning-with-Files
+### With Planning-with-Files (Optional)
 
-**Recommended workflow:**
+This plugin works great standalone, but can be combined with [planning-with-files](https://github.com/OthmanAdi/planning-with-files) for complete workflow coverage.
+
+**How they work together:**
 
 1. **Planning Phase** (Spec Workflow):
    ```
-   .specs/requirements.md  → What to build
-   .specs/design.md        → How to build
-   .specs/tasks.md         → Task breakdown
+   .specs/requirements.md  → Define WHAT to build
+   .specs/design.md        → Define HOW to build
+   .specs/tasks.md         → Break down into tasks
    ```
 
 2. **Execution Phase** (Planning-with-Files):
    ```
-   task_plan.md   → Execution plan (based on tasks.md)
-   findings.md    → Research & discoveries
-   progress.md    → Session log & errors
+   task_plan.md   → Track current work (based on tasks.md)
+   findings.md    → Record discoveries & decisions
+   progress.md    → Log session activities
    ```
 
-### With Kiro
+**When to use each:**
 
-Kiro provides methodology documentation, Spec Workflow Files provides the implementation:
+- **Spec Workflow alone**: Need structured planning, team collaboration, don't need execution tracking
+- **Planning-with-Files alone**: Requirements clear, quick prototyping, need context management only
+- **Both together**: Complex projects, new features, AI-assisted development with full traceability
 
-- **Kiro**: Read about spec-driven development principles
-- **Spec Workflow Files**: Actually create and manage spec files
+**Auto-detection:**
+
+After completing all spec phases, this plugin will suggest using planning-with-files if it detects it's not yet initialized. This is optional - you can track progress manually too.
 
 ## Best Practices
 

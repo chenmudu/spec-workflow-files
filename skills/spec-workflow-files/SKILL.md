@@ -66,10 +66,28 @@ hooks:
             fi
 
   Stop:
-    # Check workflow status before stopping
+    # Check workflow status and suggest planning-with-files integration
     - hooks:
         - type: command
-          command: "${CLAUDE_PLUGIN_ROOT}/scripts/check-status.sh 2>/dev/null || true"
+          command: |
+            # Show workflow status
+            ${CLAUDE_PLUGIN_ROOT}/scripts/check-status.sh 2>/dev/null || true
+
+            # Check if all phases are confirmed
+            if [[ -f .specs/.workflow-confirmations.json ]]; then
+              if jq -e '.requirements == "confirmed" and .design == "confirmed" and .tasks == "confirmed"' .specs/.workflow-confirmations.json >/dev/null 2>&1; then
+                # Check if planning-with-files is not yet initialized
+                if [[ ! -f task_plan.md ]] && [[ ! -f findings.md ]] && [[ ! -f progress.md ]]; then
+                  echo ""
+                  echo "💡 [spec-workflow] All phases confirmed! Consider using planning-with-files for execution:"
+                  echo "   • task_plan.md - Track implementation progress"
+                  echo "   • findings.md - Record discoveries and decisions"
+                  echo "   • progress.md - Log session activities"
+                  echo ""
+                  echo "   Your .specs/ files provide the perfect planning foundation!"
+                fi
+              fi
+            fi
 ---
 
 # Spec Workflow Files
@@ -252,31 +270,72 @@ ${CLAUDE_PLUGIN_ROOT}/scripts/init-spec.sh
 - Experimental prototypes
 - Time-critical hotfixes
 
-## Integration with Planning-with-Files
+## Integration with Planning-with-Files (Optional)
 
-**Recommended workflow:**
+This plugin works great standalone, but can be combined with planning-with-files for complete workflow coverage.
 
-1. **Spec Workflow** (Planning phase)
-   - Define requirements, design, tasks
-   - Files in `.specs/`
+### How They Work Together
 
-2. **Planning-with-Files** (Execution phase)
-   - Create `task_plan.md` based on `tasks.md`
-   - Track execution with `findings.md` and `progress.md`
-   - Files in project root
+**Spec Workflow Files** (Planning phase):
+- ✅ Structured planning: requirements → design → tasks
+- ✅ Enforces proper sequencing with hooks
+- ✅ Files in `.specs/` directory (clean separation)
 
-**Combined structure:**
+**Planning-with-Files** (Execution phase):
+- ✅ Execution tracking: task_plan → findings → progress
+- ✅ Context management across sessions
+- ✅ Files in project root
+
+### Combined Workflow
+
+```
+1. Planning Phase (Spec Workflow)
+   ├── requirements.md  → Define WHAT to build
+   ├── design.md        → Define HOW to build
+   └── tasks.md         → Break down into tasks
+
+2. Execution Phase (Planning-with-Files)
+   ├── task_plan.md     → Track current work
+   ├── findings.md      → Record discoveries
+   └── progress.md      → Log session history
+```
+
+### File Structure
+
 ```
 your-project/
 ├── .specs/              # Spec Workflow (planning)
-│   ├── requirements.md
-│   ├── design.md
-│   └── tasks.md
+│   ├── requirements.md  # WHAT to build
+│   ├── design.md        # HOW to build
+│   ├── tasks.md         # Task breakdown
+│   └── .workflow-confirmations.json
 ├── task_plan.md         # Planning-with-Files (execution)
-├── findings.md
-├── progress.md
-└── src/
+├── findings.md          # Research & decisions
+├── progress.md          # Session log
+└── src/                 # Your code
 ```
+
+### When to Use Each
+
+**Use Spec Workflow alone:**
+- Need structured planning
+- Team collaboration requires docs
+- Don't need detailed execution tracking
+
+**Use Planning-with-Files alone:**
+- Requirements already clear
+- Quick prototyping
+- Need context management only
+
+**Use both together (recommended for complex projects):**
+- New feature development
+- Complex system changes
+- AI-assisted development
+- Team collaboration
+
+### Auto-Detection
+
+After completing all spec phases, this plugin will suggest using planning-with-files if it detects it's not yet initialized. This is optional - you can track progress manually too.
 
 ## Best Practices
 

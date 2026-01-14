@@ -1,5 +1,7 @@
 # Spec Workflow Files
 
+English | [简体中文](README_CN.md)
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 File-based spec workflow for systematic feature development. Creates structured documentation in `.specs/` directory with hooks for workflow enforcement.
@@ -43,7 +45,7 @@ A Claude Code plugin that enforces a three-phase workflow for feature developmen
 
 ```
 your-project/
-├── .specs/                          # All spec files here (clean!)
+├── .specs/                          # Spec files in dedicated directory
 │   ├── requirements.md              # Phase 1: What to build
 │   ├── design.md                    # Phase 2: How to build
 │   ├── tasks.md                     # Phase 3: Task breakdown
@@ -52,44 +54,20 @@ your-project/
 └── ...
 ```
 
-**Why `.specs/`?** Keeps your project root clean (unlike some other tools that pollute the root directory).
-
 ## 🔄 Workflow
 
-### Phase 1: Requirements
+Three phases with enforced sequencing:
 
-1. Edit `.specs/requirements.md`
-2. Write user stories and acceptance criteria (EARS format)
-3. Mark as confirmed when ready
-
-**EARS Format Example:**
+**Phase 1: Requirements** → Edit `.specs/requirements.md` with EARS format
 ```markdown
 WHEN user submits valid login credentials THEN system SHALL authenticate user
-IF user is not authenticated THEN system SHALL redirect to login page
 ```
 
-### Phase 2: Design
+**Phase 2: Design** → Edit `.specs/design.md` with architecture and APIs
 
-1. Edit `.specs/design.md`
-2. Define architecture, data models, APIs
-3. Document technical decisions
-4. Mark as confirmed when ready
+**Phase 3: Tasks** → Edit `.specs/tasks.md` with numbered implementation tasks
 
-### Phase 3: Tasks
-
-1. Edit `.specs/tasks.md`
-2. Break design into numbered tasks
-3. Mark as confirmed and start implementation
-
-### Track Progress
-
-```bash
-# Mark task as complete
-${CLAUDE_PLUGIN_ROOT}/scripts/complete-task.sh 1
-
-# Check status
-${CLAUDE_PLUGIN_ROOT}/scripts/check-status.sh
-```
+Mark each phase as confirmed before proceeding to the next.
 
 ## 🎣 Hooks
 
@@ -99,46 +77,44 @@ The plugin uses hooks to guide your workflow:
 - **PostToolUse**: Reminds you to confirm after editing
 - **Stop**: Shows workflow status before Claude stops
 
-## 🤝 Integration with Planning-with-Files
+## 🤝 Integration with Planning-with-Files (Optional)
 
-**Perfect combo for complete project workflow:**
+Works standalone or combined with [planning-with-files](https://github.com/OthmanAdi/planning-with-files):
 
-```
-Planning Phase (Spec Workflow):
-├── .specs/requirements.md    # What to build
-├── .specs/design.md          # How to build
-└── .specs/tasks.md           # Task breakdown
+- **Spec Workflow** → Planning (requirements → design → tasks in `.specs/`)
+- **Planning-with-Files** → Execution (task_plan.md, findings.md, progress.md in root)
 
-Execution Phase (Planning-with-Files):
-├── task_plan.md              # Execution plan
-├── findings.md               # Research & discoveries
-└── progress.md               # Session log
-```
+After completing all phases, the plugin suggests using planning-with-files if detected.
 
-**Workflow:**
-1. Use **Spec Workflow** to plan (requirements → design → tasks)
-2. Use **Planning-with-Files** to execute (track progress, errors, findings)
+## 📊 Feature Comparison
 
-## 📊 Comparison
+| Feature | Spec Workflow Files | Planning-with-Files |
+|---------|---------------------|---------------------|
+| **Purpose** | Planning & Documentation | Execution Tracking |
+| **Files** | 3 (in `.specs/`) | 3 (in root) |
+| **Hooks** | ✅ Yes | ✅ Yes |
+| **Phase Enforcement** | ✅ Yes | ❌ No |
+| **EARS Format** | ✅ Yes | ❌ No |
+| **Task Tracking** | ✅ Yes | ✅ Yes |
+| **Clean Directory** | ✅ `.specs/` | ⚠️ Root files |
+| **Best For** | Planning phase | Execution phase |
 
-| Feature | Spec Workflow Files | Planning-with-Files | Kiro |
-|---------|---------------------|---------------------|------|
-| **Purpose** | Planning & Documentation | Execution Tracking | Methodology Guide |
-| **Files** | 3 (in `.specs/`) | 3 (in root) | Documentation only |
-| **Hooks** | ✅ Yes | ✅ Yes | ❌ No |
-| **Phase Enforcement** | ✅ Yes | ❌ No | ❌ No |
-| **EARS Format** | ✅ Yes | ❌ No | ✅ Yes |
-| **Task Tracking** | ✅ Yes | ✅ Yes | ❌ No |
-| **Clean Directory** | ✅ `.specs/` | ❌ Root pollution | N/A |
+## 🎓 Best Practices
 
-## 🎓 When to Use
+1. **Complete each phase** - Don't skip ahead, each builds on the previous
+2. **Use EARS format** - `WHEN [trigger] THEN system SHALL [response]`
+3. **Document decisions** - Record why you chose an approach in design.md
+4. **Keep specs updated** - Update when requirements or design evolves
+5. **Combine with planning-with-files** - For complex projects needing execution tracking
+
+## 🎯 When to Use
 
 **✅ Use for:**
 - New feature development
 - Complex system changes
 - Projects requiring documentation
 - Team collaboration
-- Anything needing structured planning
+- AI-assisted development
 
 **❌ Skip for:**
 - Simple bug fixes
@@ -148,75 +124,22 @@ Execution Phase (Planning-with-Files):
 
 ## 📖 Documentation
 
-- [Plugin Documentation](PLUGIN.md) - Installation and usage details
-- [SKILL.md](skills/spec-workflow-files/SKILL.md) - Complete skill reference
+- [Plugin Documentation](PLUGIN.md) - Installation and usage
+- [SKILL.md](skills/spec-workflow-files/SKILL.md) - Complete reference
 - [Templates](skills/spec-workflow-files/templates/) - Document templates
-
-## 🛠️ Development
-
-```bash
-# Clone repository
-git clone https://github.com/chenmudu/spec-workflow-files.git
-cd spec-workflow-files
-
-# Install locally
-/plugin marketplace add ./
-/plugin install spec-workflow-files@spec-workflow-files
-```
 
 ## 📝 Example
 
-**requirements.md:**
-```markdown
-## User Story
-As a user, I want to reset my password, so that I can regain access to my account.
-
-## Acceptance Criteria
-1. WHEN user clicks "Forgot Password" THEN system SHALL display email input form
-2. WHEN user submits valid email THEN system SHALL send reset link
-3. WHEN user clicks reset link THEN system SHALL display password reset form
-```
-
-**design.md:**
-```markdown
-## Architecture
-- Frontend: React password reset flow
-- Backend: Express.js endpoints (/forgot-password, /reset-password)
-- Email: SendGrid for reset emails
-- Security: JWT tokens with 1-hour expiration
-
-## API Endpoints
-POST /api/auth/forgot-password
-POST /api/auth/reset-password/:token
-```
-
-**tasks.md:**
-```markdown
-- [ ] 1. **Create password reset table**
-    - Goal: Store reset tokens
-    - Details: token, user_id, expires_at
-
-- [ ] 2. **Implement forgot-password endpoint**
-    - Goal: Generate and send reset token
-    - Details: Create token, send email, store in DB
-
-- [ ] 3. **Implement reset-password endpoint**
-    - Goal: Validate token and update password
-    - Details: Check expiration, hash password, update user
-```
+See [PLUGIN.md](PLUGIN.md) for complete examples of requirements.md, design.md, and tasks.md.
 
 ## 🤔 Philosophy
 
-**Inspired by:**
-- **Manus** (planning-with-files) - File-based persistence
-- **Kiro** - Spec-driven development methodology
-- **EARS** - Easy Approach to Requirements Syntax
-
 **Core principles:**
-1. **Files over memory** - Persistent documentation beats volatile context
-2. **Structure over chaos** - Enforced phases prevent premature implementation
-3. **Clean over messy** - `.specs/` directory keeps project root clean
-4. **Guidance over freedom** - Hooks nudge you toward best practices
+1. Files over memory - Persistent documentation beats volatile context
+2. Structure over chaos - Enforced phases prevent premature implementation
+3. Guidance over freedom - Hooks nudge toward best practices
+
+**Inspired by:** Manus (planning-with-files), Kiro (spec-driven development), EARS (requirements syntax)
 
 ## 📄 License
 
@@ -224,23 +147,14 @@ MIT License - see [LICENSE](LICENSE) file
 
 ## 👤 Author
 
-**chenmudu**
-- GitHub: [@chenmudu](https://github.com/chenmudu)
-- Email: chenmudu@gmail.com
+**chenmudu** - [@chenmudu](https://github.com/chenmudu)
 
 ## 🙏 Acknowledgments
 
-- [OthmanAdi/planning-with-files](https://github.com/OthmanAdi/planning-with-files) - Inspiration for file-based workflow
-- [jasonkneen/kiro](https://github.com/jasonkneen/kiro) - Spec-driven methodology
-- Meta's Manus - Original file-based planning concept
+- [OthmanAdi/planning-with-files](https://github.com/OthmanAdi/planning-with-files)
+- [jasonkneen/kiro](https://github.com/jasonkneen/kiro)
+- Meta's Manus
 
-## 🐛 Issues & Contributions
+---
 
-Found a bug? Have a feature request?
-
-- Open an issue: https://github.com/chenmudu/spec-workflow-files/issues
-- Submit a PR: https://github.com/chenmudu/spec-workflow-files/pulls
-
-## ⭐ Star History
-
-If you find this useful, please star the repo!
+**Issues & Contributions:** https://github.com/chenmudu/spec-workflow-files/issues
